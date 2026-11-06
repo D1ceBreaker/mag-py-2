@@ -6,3 +6,5 @@ __pycache__/
 .ruff_cache/
 data/
 db_meta.json
+db_meta.json.*.tmp
+.DS_Store
