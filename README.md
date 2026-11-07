@@ -8,19 +8,14 @@
 
 ## Установка и запуск
 
-Для запуска нужен Python 3.12. Если используете uv, из корня проекта выполните:
+Для запуска нужны Python 3.12 и uv. Из корня проекта выполните:
 
 ```sh
-make install
-make run
+./run.sh
 ```
 
-Напрямую через uv:
-
-```sh
-uv sync
-uv run database
-```
+Скрипт устанавливает зависимости, собирает пакет и запускает базу данных.
+Данные сохраняются в каталоге проекта.
 
 Если используете Poetry 2:
 
@@ -75,10 +70,9 @@ poetry run database
 asciinema play demo.cast
 ```
 
-## Проверка и сборка
+## Проверка
 
 ```sh
-make lint
-make build
+uv run ruff check .
 uvx twine check dist/*
 ```
