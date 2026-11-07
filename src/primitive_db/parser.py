@@ -1,5 +1,3 @@
-"""Разбор значений и условий консольных команд."""
-
 from .constants import BOOLEAN_VALUES, Clause, Value
 
 type Token = tuple[str, bool, int, int]

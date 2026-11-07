@@ -1,14 +1,13 @@
 import time
-from typing import Callable
+from typing import Any, Callable
 
 from .constants import CACHE_LIMIT, CONFIRM_PROMPT
 
 
-def handle_db_errors[**P, R](operation: Callable[P, R]) -> Callable[P, R | None]:
+def handle_db_errors(operation: Callable) -> Callable:
     """Выводит ошибки базы данных и возвращает None при сбое."""
 
-    def wrapper(*args: P.args, **kwargs: P.kwargs) -> R | None:
-        """Выполняет операцию с обработкой ошибок."""
+    def wrapper(*args: Any, **kwargs: Any) -> Any:
         try:
             return operation(*args, **kwargs)
         except FileNotFoundError:
@@ -24,16 +23,13 @@ def handle_db_errors[**P, R](operation: Callable[P, R]) -> Callable[P, R | None]
     return wrapper
 
 
-def confirm_action[**P, R](
-    action_name: str,
-) -> Callable[[Callable[P, R]], Callable[P, R | None]]:
+def confirm_action(action_name: str) -> Callable:
     """Создаёт декоратор для подтверждения опасной операции."""
 
-    def decorate(operation: Callable[P, R]) -> Callable[P, R | None]:
+    def decorate(operation: Callable) -> Callable:
         """Запрашивает подтверждение перед вызовом операции."""
 
-        def wrapper(*args: P.args, **kwargs: P.kwargs) -> R | None:
-            """Выполняет действие только после ответа y."""
+        def wrapper(*args: Any, **kwargs: Any) -> Any:
             if input(CONFIRM_PROMPT.format(action_name)) != "y":
                 print("Операция отменена.")
                 return None
@@ -44,11 +40,10 @@ def confirm_action[**P, R](
     return decorate
 
 
-def log_time[**P, R](operation: Callable[P, R]) -> Callable[P, R]:
+def log_time(operation: Callable) -> Callable:
     """Измеряет длительность вызова функции."""
 
-    def wrapper(*args: P.args, **kwargs: P.kwargs) -> R:
-        """Выводит длительность вызова в секундах."""
+    def wrapper(*args: Any, **kwargs: Any) -> Any:
         started_at = time.monotonic()
         try:
             return operation(*args, **kwargs)
@@ -59,12 +54,12 @@ def log_time[**P, R](operation: Callable[P, R]) -> Callable[P, R]:
     return wrapper
 
 
-def create_cacher[K, R]() -> Callable[[K, Callable[[], R]], R]:
+def create_cacher() -> Callable:
     """Создаёт функцию, которая хранит результаты вызовов по ключу."""
-    cache: dict[K, R] = {}
 
-    def cache_result(key: K, value_func: Callable[[], R]) -> R:
-        """Вычисляет результат при первом обращении к ключу."""
+    cache: dict[object, Any] = {}
+
+    def cache_result(key: object, value_func: Callable) -> Any:
         if key not in cache:
             result = value_func()
             if len(cache) >= CACHE_LIMIT:

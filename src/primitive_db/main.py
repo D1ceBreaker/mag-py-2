@@ -1,8 +1,7 @@
 from .engine import run
 
 
-def main() -> None:
-    """Запускает консоль базы данных."""
+def main():
     run()
 
 
