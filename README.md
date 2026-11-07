@@ -59,10 +59,10 @@ poetry run database
 
 ## Демонстрация
 
-Запись показывает установку пакета, запуск консоли, создание таблицы, обработку
-ошибки ввода, все CRUD-операции и подтверждение удаления.
+Запись показывает сборку и запуск через `./run.sh`, текущую справку,
+создание таблицы, обработку ошибки ввода, все CRUD-операции и подтверждение удаления.
 
-[![Открыть демонстрацию в asciinema](https://asciinema.org/a/BHZtPMpb2D01Nsnb.svg)](https://asciinema.org/a/BHZtPMpb2D01Nsnb)
+[![Открыть демонстрацию в asciinema](https://asciinema.org/a/tmBlI3FQF69dW5V3.svg)](https://asciinema.org/a/tmBlI3FQF69dW5V3)
 
 Локальная копия записи хранится в [demo.cast](demo.cast).
 
