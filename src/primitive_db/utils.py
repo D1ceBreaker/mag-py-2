@@ -1,7 +1,7 @@
 import json
 import os
 
-from .constants import DATA_DIR, ENCODING, Metadata, Row
+from .constants import DATA_DIR, ENCODING, TEMP_SUFFIX_BYTES, Metadata, Row
 
 
 def load_metadata(filepath: str) -> Metadata:
@@ -50,7 +50,7 @@ def _table_path(table_name: str) -> str:
 
 def _save_json(filepath: str, data: Metadata | list[Row]) -> None:
     """Заменяет JSON-файл после успешной записи временного файла."""
-    temporary_path = f"{filepath}.{os.urandom(8).hex()}.tmp"
+    temporary_path = f"{filepath}.{os.urandom(TEMP_SUFFIX_BYTES).hex()}.tmp"
     try:
         with open(temporary_path, "x", encoding=ENCODING) as destination:
             json.dump(data, destination, ensure_ascii=False, indent=2)

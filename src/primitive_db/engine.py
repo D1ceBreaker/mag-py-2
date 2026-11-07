@@ -4,7 +4,7 @@ import prompt
 from prettytable import PrettyTable
 
 from . import core
-from .constants import COMMAND_PROMPT, ID_COLUMN, META_FILE, Row, Schema
+from .constants import COMMAND_PROMPT, HELP_TEXT, ID_COLUMN, META_FILE, Row, Schema
 from .decorators import handle_db_errors
 from .parser import parse_set, parse_values, parse_where, split_where
 from .utils import (
@@ -14,26 +14,6 @@ from .utils import (
     save_metadata,
     save_table_data,
 )
-
-HELP_TEXT = """
-***База данных***
-
-Управление таблицами
-  create_table  <таблица> <столбец:тип> ...                                             |создать таблицу
-  list_tables                                                                           |показать список таблиц
-  drop_table    <таблица>                                                               |удалить таблицу
-  info          <таблица>                                                               |показать схему и число записей
-
-Операции с данными
-  insert into   <таблица> values (...)                                                  |добавить запись
-  select from   <таблица> where  <столбец> = <значение>                                 |прочитать записи
-  update        <таблица> set    <столбец> = <значение> where <столбец> = <значение>    |обновить записи
-  delete from   <таблица> where  <столбец> = <значение>                                 |удалить записи
-
-Общие команды
-  help                                                                                  |показать справку
-  exit                                                                                  |выйти
-"""
 
 
 def run() -> None:
