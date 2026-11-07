@@ -59,8 +59,7 @@ def create_cacher() -> Callable:
 
     cache: dict[object, Any] = {}
 
-    def cache_result(key: object, value_func: Callable) -> Any:
-        """Возвращает сохранённый результат или вычисляет его по ключу."""
+    def cacher(key: object, value_func: Callable) -> Any:
         if key not in cache:
             result = value_func()
             if len(cache) >= CACHE_LIMIT:
@@ -68,4 +67,4 @@ def create_cacher() -> Callable:
             cache[key] = result
         return cache[key]
 
-    return cache_result
+    return cacher
